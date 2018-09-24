@@ -1,4 +1,0 @@
-#Mon Sep 24 12:08:16 IST 2018
-base.0=/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/transforms/dexMerger/debug/1
-path.0=classes.dex
-renamed.0=classes.dex
