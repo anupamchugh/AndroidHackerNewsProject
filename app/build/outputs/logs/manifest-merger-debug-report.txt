@@ -12,6 +12,7 @@ MERGED from [com.google.firebase:firebase-auth:16.0.3] /Users/anupamchugh/.gradl
 MERGED from [com.google.firebase:firebase-core:16.0.3] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.3.aar/d7f8a27f5d166ccdc975568a394455f7/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-database:16.0.2] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.2.aar/08b60bc2f201ec07828e053bd280bee0/AndroidManifest.xml:15:1-22:12
 MERGED from [com.google.android.gms:play-services-auth:16.0.0] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.0.aar/a0686fd4e6103e1da8238103427f2ed0/AndroidManifest.xml:17:1-39:12
+MERGED from [io.realm:android-adapters:2.1.0] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/android-adapters-2.1.0.aar/55d323c82757d2c4a187d4e704c15349/AndroidManifest.xml:2:1-10:12
 MERGED from [com.getkeepsafe.relinker:relinker:1.2.2] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/relinker-1.2.2.aar/990365d0dbfe03db77437251a7d9ee74/AndroidManifest.xml:2:1-9:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc02] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-rc02.aar/5b64f328575ca733e3a5b81f8e08926b/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:28.0.0-rc02] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-rc02.aar/add17b46033d2c5815a5809e350fa8b6/AndroidManifest.xml:17:1-22:12
@@ -198,6 +199,8 @@ MERGED from [com.google.firebase:firebase-database:16.0.2] /Users/anupamchugh/.g
 MERGED from [com.google.firebase:firebase-database:16.0.2] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.2.aar/08b60bc2f201ec07828e053bd280bee0/AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.android.gms:play-services-auth:16.0.0] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.0.aar/a0686fd4e6103e1da8238103427f2ed0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:16.0.0] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.0.aar/a0686fd4e6103e1da8238103427f2ed0/AndroidManifest.xml:20:5-44
+MERGED from [io.realm:android-adapters:2.1.0] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/android-adapters-2.1.0.aar/55d323c82757d2c4a187d4e704c15349/AndroidManifest.xml:6:5-8:41
+MERGED from [io.realm:android-adapters:2.1.0] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/android-adapters-2.1.0.aar/55d323c82757d2c4a187d4e704c15349/AndroidManifest.xml:6:5-8:41
 MERGED from [com.getkeepsafe.relinker:relinker:1.2.2] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/relinker-1.2.2.aar/990365d0dbfe03db77437251a7d9ee74/AndroidManifest.xml:7:5-43
 MERGED from [com.getkeepsafe.relinker:relinker:1.2.2] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/relinker-1.2.2.aar/990365d0dbfe03db77437251a7d9ee74/AndroidManifest.xml:7:5-43
 MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc02] /Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-rc02.aar/5b64f328575ca733e3a5b81f8e08926b/AndroidManifest.xml:20:5-44
