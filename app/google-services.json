@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "488454190266",
+    "firebase_url": "https://androidhackernewsproject.firebaseio.com",
+    "project_id": "androidhackernewsproject",
+    "storage_bucket": "androidhackernewsproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488454190266:android:c3e313a86ab31a4f",
+        "android_client_info": {
+          "package_name": "com.anupamchugh.androidhackernewsproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488454190266-v2f5igkb6jvvamunpqkkkv80vajrr41n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anupamchugh.androidhackernewsproject",
+            "certificate_hash": "f262dc624d512e8a4d3b1ec605645e9c786a13d2"
+          }
+        },
+        {
+          "client_id": "488454190266-ks0993mgheakl4vbd1hk3dub6npcht61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0PjwEKQNFHRDiCuq8DFWu2kxJe6VQpok"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488454190266-ks0993mgheakl4vbd1hk3dub6npcht61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
