@@ -4,7 +4,24 @@
             "outputFile": "/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
             "map": [
                 {
-                    "source": "/Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-rc02.aar/e7ca96db7fc428fd78bc685a1645e667/res/values-large-v4/values-large-v4.xml",
+                    "source": "/Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/design-28.0.0-rc02.aar/89ed4ff90c75816321dfe071068a7ca8/res/values-large-v4/values-large-v4.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,177",
+                        "endColumns": "121,133",
+                        "endOffsets": "172,306"
+                    },
+                    "to": {
+                        "startLines": "11,12",
+                        "startColumns": "4,4",
+                        "startOffsets": "752,874",
+                        "endColumns": "121,133",
+                        "endOffsets": "869,1003"
+                    }
+                },
+                {
+                    "source": "/Users/anupamchugh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-rc02.aar/c08052c2e7e194084f3237b09e9c2aa9/res/values-large-v4/values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
