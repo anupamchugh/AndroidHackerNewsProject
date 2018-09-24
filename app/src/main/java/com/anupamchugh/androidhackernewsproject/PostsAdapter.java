@@ -59,8 +59,6 @@ public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.B
         }
 
         public void bind(final Posts book) {
-            // cast the generic view holder to our specific one
-            // set the title and the snippet
             final long id = book.id;
 
             textTitle.setText(book.title);

@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
                 .build());
 
         mRecyclerView = findViewById(R.id.recyclerView);
-        //mRecyclerView.setAdapter(new PostsAdapter(mRealm.where(Posts.class).findAllAsync()));
-
         RealmResults<Posts> users = mRealm.where(Posts.class).findAll();
         Log.d("API123", " " + users.size());
         mRecyclerView.setAdapter(new PostsAdapter(users));
