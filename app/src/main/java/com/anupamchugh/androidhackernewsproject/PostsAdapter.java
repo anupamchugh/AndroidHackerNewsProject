@@ -1,17 +1,19 @@
 package com.anupamchugh.androidhackernewsproject;
 
-import android.content.Context;
-import android.support.v7.widget.CardView;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
-public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.BookViewHolder> {
+public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.PostViewHolder> {
 
     RealmResults<Posts> mBooks;
 
@@ -23,21 +25,27 @@ public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.B
 
     // create new views (invoked by the layout manager)
     @Override
-    public BookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // inflate a new card view
-        return new BookViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_rows, parent, false));
+        return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_rows, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(BookViewHolder holder, final int position) {
+    public void onBindViewHolder(PostViewHolder holder, final int position) {
         // get the article
-        final Posts book = getItem(position);
-        if (book != null) {
-            holder.bind(book);
+        final Posts post = getItem(position);
+        if (post != null) {
+            holder.bind(post);
         }
     }
 
-    public static class BookViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onBindViewHolder(PostViewHolder holder, int position, List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
+
+    }
+
+    public static class PostViewHolder extends RecyclerView.ViewHolder {
 
         TextView textTitle;
         TextView textLink;
@@ -46,7 +54,7 @@ public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.B
         TextView textVotes;
 
 
-        public BookViewHolder(View itemView) {
+        public PostViewHolder(View itemView) {
             // standard view holder pattern with ButterKnife view injection
             super(itemView);
 
@@ -58,20 +66,33 @@ public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.B
 
         }
 
-        public void bind(final Posts book) {
-            final long id = book.id;
+        public void bind(final Posts post) {
+            final long id = post.id;
 
-            textTitle.setText(book.title);
-            textLink.setText(book.link);
-            textTime.setText(book.timeStamp);
-            textComments.setText(book.comments);
-            textVotes.setText(book.votes);
+            Log.d("API123", post.title);
+
+            textTitle.setText(post.title);
+            textLink.setText(post.link);
+            textTime.setText(String.valueOf(post.timeStamp));
+            textComments.setText(post.comments);
+            textVotes.setText(post.votes);
         }
     }
 
     @Override
     public int getItemCount() {
         return mBooks.size();
+    }
+
+    public RealmResults<Posts> getData() {
+        return mBooks;
+    }
+
+    public void setData(RealmResults<Posts> newData) {
+
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffUtilCallBack(newData, mBooks));
+        mBooks = newData;
+        diffResult.dispatchUpdatesTo(this);
     }
 }
 

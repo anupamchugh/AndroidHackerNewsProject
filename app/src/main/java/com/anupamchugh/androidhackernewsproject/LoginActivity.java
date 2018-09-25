@@ -170,6 +170,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.d(TAG, "Google sign in failed", e);
+                Toast.makeText(getApplicationContext(), "Sign in Failed", Toast.LENGTH_SHORT).show();
                 // ...
             }
 

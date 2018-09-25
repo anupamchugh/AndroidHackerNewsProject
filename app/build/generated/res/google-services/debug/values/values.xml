@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">488454190266-ks0993mgheakl4vbd1hk3dub6npcht61.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://androidhackernewsproject.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">488454190266</string>
+    <string name="google_api_key" translatable="false">AIzaSyA0PjwEKQNFHRDiCuq8DFWu2kxJe6VQpok</string>
+    <string name="google_app_id" translatable="false">1:488454190266:android:c3e313a86ab31a4f</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA0PjwEKQNFHRDiCuq8DFWu2kxJe6VQpok</string>
+    <string name="google_storage_bucket" translatable="false">androidhackernewsproject.appspot.com</string>
+    <string name="project_id" translatable="false">androidhackernewsproject</string>
+</resources>
