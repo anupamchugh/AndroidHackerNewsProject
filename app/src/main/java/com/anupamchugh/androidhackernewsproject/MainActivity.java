@@ -9,30 +9,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
+import android.widget.Toast;
 
+import com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject;
+import com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject;
+import com.anupamchugh.androidhackernewsproject.realmPOJO.Posts;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import io.realm.RealmConfiguration;
-import io.realm.RealmList;
 import io.realm.RealmResults;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    Realm mRealm;
+
     RecyclerView mRecyclerView;
+    Realm mRealm;
     FloatingActionButton fab;
     PostsAdapter mAdapter;
     RealmResults<Posts> users;
     SwipeRefreshLayout mSwipeRefreshLayout;
     APIInterface apiInterface;
-
+    List<PostIdRealmObject> oldPostIdList;
+    RealmResults<PostIdRealmObject> postIdRealmObjectRealmResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,87 +55,32 @@ public class MainActivity extends AppCompatActivity {
 
         Realm.init(getApplicationContext());
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        mRealm = Realm.getDefaultInstance();
         Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .build());
 
-
-        //loadDummyData();
-
-        Call<List<Integer>> integerList = apiInterface.doGetPostId();
-        integerList.enqueue(new Callback<List<Integer>>() {
-            @Override
-            public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {
-                Log.d("API123", response.body() + " ");
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Integer>> call, Throwable t) {
-
-            }
-        });
+        mRealm = Realm.getDefaultInstance();
 
         initViews();
         users = mRealm.where(Posts.class).findAll();
+        Log.d("API123", users.size() + " ");
         mAdapter = new PostsAdapter(users);
-        Log.d("API123", " " + users.size());
         mRecyclerView.setAdapter(mAdapter);
+        fetchAllIdsFromRetrofit();
 
-        users.addChangeListener(new RealmChangeListener<RealmResults<Posts>>() {
-            @Override
-            public void onChange(RealmResults<Posts> posts) {
-                Log.d("API123", "onChanged " + posts.size());
-            }
-        });
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Posts post = new Posts();
-
-                post.id = new Random().nextLong();
-                post.title = ("Anupam Chugh");
-                post.comments = "0";
-                post.votes = "0";
-                post.link = "anupamchugh.com";
-                post.timeStamp = 12343545;
-
-                mRealm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        realm.insertOrUpdate(post);
-                    }
-                });
-
-
-                mRealm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        users = realm.where(Posts.class).findAll();
-                        mAdapter.setData(users);
-                        mRecyclerView.scrollToPosition(0);
-                    }
-                });
-
-
-            }
-        });
-
-    }
-
-    private void gotoLogin() {
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mRealm != null && !mRealm.isClosed())
+        if (mRealm != null && !mRealm.isClosed()) {
             mRealm.close();
+        }
+    }
+
+    private void gotoLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
     private void initViews() {
@@ -146,28 +105,222 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loadDummyData() {
+    public void storeIdInRealm(final PostIdRealmObject postIdRealmObject) {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.insertOrUpdate(postIdRealmObject);
+                }
+            });
+        } catch (Exception e) {
+            Log.d("API123", e.toString());
+        }
+    }
+
+    public List<PostIdRealmObject> getAllPostIdInRealm() {
+
+        try (Realm realm = Realm.getDefaultInstance()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmResults<PostIdRealmObject> postIdRealmObjects = realm.where(PostIdRealmObject.class).findAll();
+                    oldPostIdList = realm.copyFromRealm(postIdRealmObjects);
+                }
+            });
+        } catch (Exception e) {
+            Log.d("API123", e.toString());
+        }
+
+        return oldPostIdList;
+    }
+
+
+    public void fetchPostsFromRealm() {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            postIdRealmObjectRealmResults = realm.where(PostIdRealmObject.class).equalTo(PostIdRealmObject.IS_CACHED, false).findAll();
+        }
+
+        Log.d("API123", "getAllPostIdRealm");
+        try (Realm realm = Realm.getDefaultInstance()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+
+
+                    for (PostIdRealmObject postIdRealmObject : postIdRealmObjectRealmResults) {
+                        Log.d("API1234", postIdRealmObject.postId + " " + postIdRealmObject.isCached);
+
+                        retrieveNonCachedPosts(postIdRealmObject);
+                    }
+
+
+                }
+            });
+        } catch (Exception e) {
+            Log.d("API123", "fetchPostsFromRealm exception " + e.toString());
+        }
+
+        Log.d("API123456", "BREAK................\n\n\n\n");
+
+        updateRecyclerViewFromRealm();
+    }
+
+    public void testRealm() {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            postIdRealmObjectRealmResults = realm.where(PostIdRealmObject.class).equalTo(PostIdRealmObject.IS_CACHED, false).findAll();
+        }
+
+        Log.d("API123", "getAllPostIdRealm");
+        try (Realm realm = Realm.getDefaultInstance()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    for (PostIdRealmObject postIdRealmObject : postIdRealmObjectRealmResults) {
+                        Log.d("API123456", postIdRealmObject.postId + " " + postIdRealmObject.isCached);
+                    }
+                }
+            });
+
+            Log.d("API123456", "BREAK................\n\n\n\n");
+        } catch (Exception e) {
+            Log.d("API123", "fetchPostsFromRealm exception " + e.toString());
+        }
+    }
+
+    public void updateRecyclerViewFromRealm() {
+        //try (Realm realm = Realm.getDefaultInstance()) {
+
+
+        Log.d("API123","\n\n\n\nUPDATE RECYCLERVIEW FROM REALM.......\n\n\n\n\n\n");
+        testRealm();
+
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                Posts post = new Posts();
+                users = realm.where(Posts.class).findAll();
+                mAdapter.setData(users);
+                mRecyclerView.scrollToPosition(0);
+            }
+        });
+        //}
+    }
 
-                post.id = 1;
-                post.title = ("Reto Meier");
-                post.comments = "20";
-                post.votes = "50";
-                post.link = "google.com";
-                post.timeStamp = 12343545;
-                realm.insertOrUpdate(post);
+    public void insertPostInRealm(final Posts post, final PostIdRealmObject postIdRealmObject) {
 
-                post.id = 2;
-                post.title = ("Hello how are you doing?");
-                post.comments = "200";
-                post.votes = "0";
-                post.link = "asasasas.com";
-                post.timeStamp = 12343545;
-                realm.insertOrUpdate(post);
+        boolean isCached = true;
+
+
+        try (Realm realm = Realm.getDefaultInstance()) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.insertOrUpdate(post);
+
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "insertPostRealm failed", Toast.LENGTH_SHORT).show();
+            Log.d("API123", e.toString());
+
+            isCached = false;
+
+        }
+
+        if (isCached) {
+            try (Realm realm = Realm.getDefaultInstance()) {
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+
+                        //postIdRealmObject.isCached = true;
+                        PostIdRealmObject fetched  = realm.where(PostIdRealmObject.class).equalTo(PostIdRealmObject.POST_ID, postIdRealmObject.postId).findFirst();
+                        Log.d("A123",fetched.postId+" "+" "+fetched.isCached);
+                        fetched.isCached = true;
+                        realm.insertOrUpdate(fetched);
+
+                    }
+                });
+            }
+
+        }
+    }
+
+    public void fetchAllIdsFromRetrofit() {
+        Call<List<Long>> listCall = apiInterface.getAllPostId();
+        listCall.enqueue(new Callback<List<Long>>() {
+            @Override
+            public void onResponse(Call<List<Long>> call, Response<List<Long>> response) {
+                List<Long> integers = response.body();
+
+                List<PostIdRealmObject> oldPostIdRealmObjectList = getAllPostIdInRealm();
+
+                if (integers != null) {
+                    for (Long i : integers) {
+
+                        PostIdRealmObject postIdRealmObject = new PostIdRealmObject();
+                        postIdRealmObject.postId = i;
+
+                        if (oldPostIdRealmObjectList.contains(postIdRealmObject)) {
+                            Log.d("API123", "continue");
+                        } else
+                            storeIdInRealm(postIdRealmObject);
+                    }
+                    fetchPostsFromRealm();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Long>> call, Throwable t) {
+                call.cancel();
             }
         });
     }
+
+    public void retrieveNonCachedPosts(final PostIdRealmObject postIdRealmObject) {
+        Call<ResponseBody> postsCall = apiInterface.getPost(postIdRealmObject.postId);
+        postsCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                //Posts posts = response.body();
+
+                //JsonObject post = new JsonObject().get(response.body().toString()).getAsJsonObject();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+
+                    Posts posts = new Posts();
+                    posts.id = jsonObject.getLong("id");
+                    posts.author = jsonObject.getString("by");
+                    posts.timeStamp = jsonObject.getLong("time");
+                    posts.title = jsonObject.getString("title");
+                    posts.url = jsonObject.getString("url");
+                    posts.score = jsonObject.getInt("score");
+                    JSONArray jsonArray = jsonObject.getJSONArray("kids");
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        CommentIdObject commentIdObject = new CommentIdObject();
+                        commentIdObject.commentId = jsonArray.getLong(i);
+                        posts.commentIdObjectRealmList.add(commentIdObject);
+                    }
+
+                    insertPostInRealm(posts, postIdRealmObject);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                call.cancel();
+            }
+        });
+
+    }
+
 }

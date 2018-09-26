@@ -3,13 +3,17 @@ package com.anupamchugh.androidhackernewsproject;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 
+import com.anupamchugh.androidhackernewsproject.realmPOJO.Posts;
+
+import java.util.List;
+
 import io.realm.RealmResults;
 
 public class MyDiffUtilCallBack extends DiffUtil.Callback {
-    RealmResults<Posts> newList;
-    RealmResults<Posts> oldList;
+    List<Posts> newList;
+    List<Posts> oldList;
 
-    public MyDiffUtilCallBack(RealmResults<Posts> newList, RealmResults<Posts> oldList) {
+    public MyDiffUtilCallBack(RealmResults<Posts> newList, List<Posts> oldList) {
         this.newList = newList;
         this.oldList = oldList;
     }

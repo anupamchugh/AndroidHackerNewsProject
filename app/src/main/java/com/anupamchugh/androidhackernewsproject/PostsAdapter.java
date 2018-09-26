@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.anupamchugh.androidhackernewsproject.realmPOJO.Posts;
+
 import java.util.List;
 
 import io.realm.RealmRecyclerViewAdapter;
@@ -51,7 +53,7 @@ public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.P
         TextView textLink;
         TextView textTime;
         TextView textComments;
-        TextView textVotes;
+        TextView txtScore;
 
 
         public PostViewHolder(View itemView) {
@@ -62,20 +64,20 @@ public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.P
             textLink = itemView.findViewById(R.id.txtLink);
             textTime = itemView.findViewById(R.id.txtTime);
             textComments = itemView.findViewById(R.id.txtComments);
-            textVotes = itemView.findViewById(R.id.txtVotes);
+            txtScore = itemView.findViewById(R.id.txtScore);
 
         }
 
         public void bind(final Posts post) {
             final long id = post.id;
 
-            Log.d("API123", post.title);
+            Log.d("API123", post.title + " " + post.commentIdObjectRealmList.size());
 
             textTitle.setText(post.title);
-            textLink.setText(post.link);
+            textLink.setText(post.url);
             textTime.setText(String.valueOf(post.timeStamp));
-            textComments.setText(post.comments);
-            textVotes.setText(post.votes);
+            textComments.setText(String.valueOf(post.commentIdObjectRealmList.size()));
+            txtScore.setText(String.valueOf(post.score));
         }
     }
 

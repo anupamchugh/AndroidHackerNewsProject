@@ -17,13 +17,14 @@
 
 
         <TextView
-            android:id="@+id/txtVotes"
+            android:id="@+id/txtScore"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
             android:background="#A0FF6327"
             android:gravity="center"
             android:text="100"
+            android:layout_gravity="fill"
             android:textStyle="bold" />
 
 
@@ -40,9 +41,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.5"
+                android:includeFontPadding="false"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:padding="4dp"
+                android:layout_gravity="fill"
                 android:text="Title goes here"
                 android:textSize="18sp" />
 
@@ -63,6 +66,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.75"
                 android:padding="4dp"
+                android:layout_gravity="fill"
                 android:text="Comment goes here"
                 android:textSize="13sp" />
 
@@ -86,10 +90,11 @@
 
             <TextView
                 android:id="@+id/txtComments"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="50"
+                android:layout_gravity="fill"
                 android:textSize="10sp" />
 
 
