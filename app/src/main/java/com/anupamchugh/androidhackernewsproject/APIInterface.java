@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-interface APIInterface {
+public interface APIInterface {
 
     @GET("topstories.json?print=pretty")
     Call<List<Long>> getAllPostId();

@@ -40,10 +40,9 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
         long urlIndex;
         long scoreIndex;
         long commentIdObjectRealmListIndex;
-        long isNotCachedIndex;
 
         PostsColumnInfo(SharedRealm realm, Table table) {
-            super(8);
+            super(7);
             this.idIndex = addColumnDetails(table, "id", RealmFieldType.INTEGER);
             this.timeStampIndex = addColumnDetails(table, "timeStamp", RealmFieldType.INTEGER);
             this.titleIndex = addColumnDetails(table, "title", RealmFieldType.STRING);
@@ -51,7 +50,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
             this.urlIndex = addColumnDetails(table, "url", RealmFieldType.STRING);
             this.scoreIndex = addColumnDetails(table, "score", RealmFieldType.INTEGER);
             this.commentIdObjectRealmListIndex = addColumnDetails(table, "commentIdObjectRealmList", RealmFieldType.LIST);
-            this.isNotCachedIndex = addColumnDetails(table, "isNotCached", RealmFieldType.BOOLEAN);
         }
 
         PostsColumnInfo(ColumnInfo src, boolean mutable) {
@@ -75,7 +73,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
             dst.urlIndex = src.urlIndex;
             dst.scoreIndex = src.scoreIndex;
             dst.commentIdObjectRealmListIndex = src.commentIdObjectRealmListIndex;
-            dst.isNotCachedIndex = src.isNotCachedIndex;
         }
     }
 
@@ -92,7 +89,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
         fieldNames.add("url");
         fieldNames.add("score");
         fieldNames.add("commentIdObjectRealmList");
-        fieldNames.add("isNotCached");
         FIELD_NAMES = Collections.unmodifiableList(fieldNames);
     }
 
@@ -319,28 +315,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
         }
     }
 
-    @Override
-    @SuppressWarnings("cast")
-    public boolean realmGet$isNotCached() {
-        proxyState.getRealm$realm().checkIfValid();
-        return (boolean) proxyState.getRow$realm().getBoolean(columnInfo.isNotCachedIndex);
-    }
-
-    @Override
-    public void realmSet$isNotCached(boolean value) {
-        if (proxyState.isUnderConstruction()) {
-            if (!proxyState.getAcceptDefaultValue$realm()) {
-                return;
-            }
-            final Row row = proxyState.getRow$realm();
-            row.getTable().setBoolean(columnInfo.isNotCachedIndex, row.getIndex(), value, true);
-            return;
-        }
-
-        proxyState.getRealm$realm().checkIfValid();
-        proxyState.getRow$realm().setBoolean(columnInfo.isNotCachedIndex, value);
-    }
-
     public static RealmObjectSchema createRealmObjectSchema(RealmSchema realmSchema) {
         if (!realmSchema.contains("Posts")) {
             RealmObjectSchema realmObjectSchema = realmSchema.create("Posts");
@@ -354,7 +328,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
                 CommentIdObjectRealmProxy.createRealmObjectSchema(realmSchema);
             }
             realmObjectSchema.add("commentIdObjectRealmList", RealmFieldType.LIST, realmSchema.get("CommentIdObject"));
-            realmObjectSchema.add("isNotCached", RealmFieldType.BOOLEAN, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
             return realmObjectSchema;
         }
         return realmSchema.get("Posts");
@@ -366,14 +339,14 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
         }
         Table table = sharedRealm.getTable("class_Posts");
         final long columnCount = table.getColumnCount();
-        if (columnCount != 8) {
-            if (columnCount < 8) {
-                throw new RealmMigrationNeededException(sharedRealm.getPath(), "Field count is less than expected - expected 8 but was " + columnCount);
+        if (columnCount != 7) {
+            if (columnCount < 7) {
+                throw new RealmMigrationNeededException(sharedRealm.getPath(), "Field count is less than expected - expected 7 but was " + columnCount);
             }
             if (allowExtraColumns) {
-                RealmLog.debug("Field count is more than expected - expected 8 but was %1$d", columnCount);
+                RealmLog.debug("Field count is more than expected - expected 7 but was %1$d", columnCount);
             } else {
-                throw new RealmMigrationNeededException(sharedRealm.getPath(), "Field count is more than expected - expected 8 but was " + columnCount);
+                throw new RealmMigrationNeededException(sharedRealm.getPath(), "Field count is more than expected - expected 7 but was " + columnCount);
             }
         }
         Map<String, RealmFieldType> columnTypes = new HashMap<String, RealmFieldType>();
@@ -460,15 +433,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
         Table table_6 = sharedRealm.getTable("class_CommentIdObject");
         if (!table.getLinkTarget(columnInfo.commentIdObjectRealmListIndex).hasSameSchema(table_6)) {
             throw new RealmMigrationNeededException(sharedRealm.getPath(), "Invalid RealmList type for field 'commentIdObjectRealmList': '" + table.getLinkTarget(columnInfo.commentIdObjectRealmListIndex).getName() + "' expected - was '" + table_6.getName() + "'");
-        }
-        if (!columnTypes.containsKey("isNotCached")) {
-            throw new RealmMigrationNeededException(sharedRealm.getPath(), "Missing field 'isNotCached' in existing Realm file. Either remove field or migrate using io.realm.internal.Table.addColumn().");
-        }
-        if (columnTypes.get("isNotCached") != RealmFieldType.BOOLEAN) {
-            throw new RealmMigrationNeededException(sharedRealm.getPath(), "Invalid type 'boolean' for field 'isNotCached' in existing Realm file.");
-        }
-        if (table.isColumnNullable(columnInfo.isNotCachedIndex)) {
-            throw new RealmMigrationNeededException(sharedRealm.getPath(), "Field 'isNotCached' does support null values in the existing Realm file. Use corresponding boxed type for field 'isNotCached' or migrate using RealmObjectSchema.setNullable().");
         }
 
         return columnInfo;
@@ -565,13 +529,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
                 }
             }
         }
-        if (json.has("isNotCached")) {
-            if (json.isNull("isNotCached")) {
-                throw new IllegalArgumentException("Trying to set non-nullable field 'isNotCached' to null.");
-            } else {
-                ((PostsRealmProxyInterface) obj).realmSet$isNotCached((boolean) json.getBoolean("isNotCached"));
-            }
-        }
         return obj;
     }
 
@@ -640,13 +597,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
                         ((PostsRealmProxyInterface) obj).realmGet$commentIdObjectRealmList().add(item);
                     }
                     reader.endArray();
-                }
-            } else if (name.equals("isNotCached")) {
-                if (reader.peek() == JsonToken.NULL) {
-                    reader.skipValue();
-                    throw new IllegalArgumentException("Trying to set non-nullable field 'isNotCached' to null.");
-                } else {
-                    ((PostsRealmProxyInterface) obj).realmSet$isNotCached((boolean) reader.nextBoolean());
                 }
             } else {
                 reader.skipValue();
@@ -727,7 +677,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
                 }
             }
 
-            ((PostsRealmProxyInterface) realmObject).realmSet$isNotCached(((PostsRealmProxyInterface) newObject).realmGet$isNotCached());
             return realmObject;
         }
     }
@@ -778,7 +727,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
             }
         }
 
-        Table.nativeSetBoolean(tableNativePtr, columnInfo.isNotCachedIndex, rowIndex, ((PostsRealmProxyInterface)object).realmGet$isNotCached(), false);
         return rowIndex;
     }
 
@@ -833,7 +781,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
                     }
                 }
 
-                Table.nativeSetBoolean(tableNativePtr, columnInfo.isNotCachedIndex, rowIndex, ((PostsRealmProxyInterface)object).realmGet$isNotCached(), false);
             }
         }
     }
@@ -889,7 +836,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
             }
         }
 
-        Table.nativeSetBoolean(tableNativePtr, columnInfo.isNotCachedIndex, rowIndex, ((PostsRealmProxyInterface)object).realmGet$isNotCached(), false);
         return rowIndex;
     }
 
@@ -949,7 +895,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
                     }
                 }
 
-                Table.nativeSetBoolean(tableNativePtr, columnInfo.isNotCachedIndex, rowIndex, ((PostsRealmProxyInterface)object).realmGet$isNotCached(), false);
             }
         }
     }
@@ -993,7 +938,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
                 unmanagedcommentIdObjectRealmListList.add(item);
             }
         }
-        ((PostsRealmProxyInterface) unmanagedObject).realmSet$isNotCached(((PostsRealmProxyInterface) realmObject).realmGet$isNotCached());
         return unmanagedObject;
     }
 
@@ -1017,7 +961,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
                 }
             }
         }
-        ((PostsRealmProxyInterface) realmObject).realmSet$isNotCached(((PostsRealmProxyInterface) newObject).realmGet$isNotCached());
         return realmObject;
     }
 
@@ -1054,10 +997,6 @@ public class PostsRealmProxy extends com.anupamchugh.androidhackernewsproject.re
         stringBuilder.append(",");
         stringBuilder.append("{commentIdObjectRealmList:");
         stringBuilder.append("RealmList<CommentIdObject>[").append(realmGet$commentIdObjectRealmList().size()).append("]");
-        stringBuilder.append("}");
-        stringBuilder.append(",");
-        stringBuilder.append("{isNotCached:");
-        stringBuilder.append(realmGet$isNotCached());
         stringBuilder.append("}");
         stringBuilder.append("]");
         return stringBuilder.toString();

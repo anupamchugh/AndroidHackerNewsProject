@@ -10,36 +10,20 @@ import io.realm.annotations.PrimaryKey;
 
 public class Posts extends RealmObject implements Comparable, Cloneable {
 
-    public static final String POST_NOT_CACHED = "isNotCached";
-
+    public static final String TIMESTAMP = "timeStamp";
 
 
     @PrimaryKey
     public long id;
-
-
     public long timeStamp;
-
-
     public String title;
-
-
     public String author;
-
-
     public String url;
-
     public int score;
-
-
     public RealmList<CommentIdObject> commentIdObjectRealmList = new RealmList<>();
 
-    public boolean isNotCached;
 
-
-    public Posts()
-    {
-
+    public Posts() {
     }
 
     @Override

@@ -16,6 +16,4 @@ public interface PostsRealmProxyInterface {
     public void realmSet$score(int value);
     public RealmList<com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject> realmGet$commentIdObjectRealmList();
     public void realmSet$commentIdObjectRealmList(RealmList<com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject> value);
-    public boolean realmGet$isNotCached();
-    public void realmSet$isNotCached(boolean value);
 }
