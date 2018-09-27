@@ -5,27 +5,45 @@
     build-mode="COLD"
     density="xxhdpi"
     format="10"
-    ir-eligibility="FIELD_REMOVED"
+    ir-eligibility="R_CLASS_CHANGE"
     plugin-version="3.1.4"
-    timestamp="1537985397012"
+    timestamp="1538026683164"
     token="-6997705433821128411"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="2598" />
+        duration="7502" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="108" />
+        duration="97" />
     <task
         name="verifier"
-        duration="13" />
+        duration="43" />
 
     <artifact
         location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
         type="SPLIT" />
     <artifact
         location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
@@ -33,40 +51,75 @@
     <artifact
         location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
         type="SPLIT" />
+    <artifact
+        location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
+        type="SPLIT" />
+    <artifact
+        location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
+        type="SPLIT" />
 
     <build
         build-mode="FULL"
-        timestamp="1537984921551"
+        timestamp="1538025069961"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
-            type="SPLIT" />
-        <artifact
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
             type="SPLIT" />
         <artifact
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
             type="SPLIT" />
         <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
+            type="SPLIT" />
+        <artifact
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
             type="SPLIT" />
         <artifact
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
             type="SPLIT" />
         <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
+            type="SPLIT" />
+        <artifact
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
+            type="SPLIT_MAIN" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1538025928282"
+        verifier="BINARY_MANIFEST_FILE_CHANGE" >
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
+            type="SPLIT_MAIN" />
+    </build>
+    <build
+        build-mode="COLD"
+        ir-eligibility="R_CLASS_CHANGE"
+        timestamp="1538026683164"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
             type="SPLIT" />
         <artifact
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
@@ -75,22 +128,25 @@
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
-            type="SPLIT_MAIN" />
-    </build>
-    <build
-        build-mode="COLD"
-        ir-eligibility="FIELD_REMOVED"
-        timestamp="1537985397012"
-        verifier="COLD_SWAP_REQUESTED" >
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+            type="SPLIT" />
         <artifact
-            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
             type="SPLIT" />
         <artifact
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
             type="SPLIT" />
         <artifact
             location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="/Users/anupamchugh/Desktop/workspace/AndroidHackerNewsProject/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
             type="SPLIT" />
     </build>
 

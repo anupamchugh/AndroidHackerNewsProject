@@ -92,4 +92,9 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="tab_A">
+        <item>Item 1A</item>
+        <item>Item 1B</item>
+    </string-array>
 </resources>
