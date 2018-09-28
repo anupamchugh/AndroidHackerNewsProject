@@ -1,5 +1,6 @@
 package com.anupamchugh.androidhackernewsproject.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -56,39 +57,36 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
     RealmResults<PostIdRealmObject> postIdRealmObjectRealmResults;
     Toolbar toolbar;
     long timeStamp;
+    public ProgressDialog mProgressDialog;
+    Handler handler;
+    Runnable r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Realm.init(getApplicationContext());
-        apiInterface = APIClient.getClient().create(APIInterface.class);
-        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build());
 
-        mRealm = Realm.getDefaultInstance();
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+        initRealm();
 
         initViews();
         updateTimeStamp();
 
+        populateRecyclerView();
+        fetchAllIdsFromRetrofit();
 
-        final Handler handler = new Handler();
-        final Runnable r = new Runnable() {
+    }
+
+    private void startHandler() {
+        handler = new Handler();
+        r = new Runnable() {
             public void run() {
                 updateTimeStamp();
                 handler.postDelayed(this, 60000);
             }
         };
-        handler.postDelayed(r, 60000);
-
-
-        users = mRealm.where(Posts.class).findAllSorted(Posts.TIMESTAMP, Sort.DESCENDING);
-        mAdapter = new PostsAdapter(users, this);
-        mRecyclerView.setAdapter(mAdapter);
-        fetchAllIdsFromRetrofit();
-
+        handler.postDelayed(r, 0);
     }
 
     @Override
@@ -97,6 +95,21 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
         if (mRealm != null && !mRealm.isClosed()) {
             mRealm.close();
         }
+    }
+
+    private void initRealm() {
+        Realm.init(getApplicationContext());
+        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build());
+
+        mRealm = Realm.getDefaultInstance();
+    }
+
+    private void populateRecyclerView() {
+        users = mRealm.where(Posts.class).findAllSortedAsync(Posts.TIMESTAMP, Sort.DESCENDING);
+        mAdapter = new PostsAdapter(users, this);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void gotoLogin() {
@@ -111,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
 
         toolbar.setTitle("Top Stories");
         toolbar.setTitleTextColor(Color.WHITE);
-        //toolbar.setSubtitle("Updated 0 minutes ago");
 
 
         toolbar.setSubtitleTextColor(Color.WHITE);
@@ -149,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
-                    RealmResults<PostIdRealmObject> postIdRealmObjects = realm.where(PostIdRealmObject.class).findAll();
+                    RealmResults<PostIdRealmObject> postIdRealmObjects = realm.where(PostIdRealmObject.class).findAllAsync();
                     oldPostIdList = realm.copyFromRealm(postIdRealmObjects);
 
 
@@ -171,7 +183,8 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
 
 
         try (Realm realm = Realm.getDefaultInstance()) {
-            postIdRealmObjectRealmResults = realm.where(PostIdRealmObject.class).equalTo(PostIdRealmObject.IS_CACHED, false).findAll();
+            postIdRealmObjectRealmResults = realm.where(PostIdRealmObject.class).equalTo(PostIdRealmObject.IS_CACHED, false).findAllAsync();
+        } catch (Exception e) {
         }
 
         try (Realm realm = Realm.getDefaultInstance()) {
@@ -195,10 +208,13 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
 
     public void updateRecyclerViewFromRealm() {
 
+
+        hideProgressDialog();
+
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                users = realm.where(Posts.class).findAll();
+                RealmResults<Posts> users = realm.where(Posts.class).findAll();
                 mAdapter.setData(users);
                 mRecyclerView.scrollToPosition(0);
             }
@@ -212,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
 
 
         try (Realm realm = Realm.getDefaultInstance()) {
-            realm.executeTransaction(new Realm.Transaction() {
+            realm.executeTransactionAsync(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     realm.insertOrUpdate(post);
@@ -231,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
                     @Override
                     public void execute(Realm realm) {
 
-                        PostIdRealmObject fetched = realm.where(PostIdRealmObject.class).equalTo(PostIdRealmObject.POST_ID, postIdRealmObject.postId).findFirst();
+                        PostIdRealmObject fetched = realm.where(PostIdRealmObject.class).equalTo(PostIdRealmObject.POST_ID, postIdRealmObject.postId).findFirstAsync();
                         fetched.isCached = true;
                         realm.copyToRealmOrUpdate(fetched);
 
@@ -243,6 +259,9 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
     }
 
     public void fetchAllIdsFromRetrofit() {
+
+
+        showProgressDialog();
         Call<List<Long>> listCall = apiInterface.getAllPostId();
         listCall.enqueue(new Callback<List<Long>>() {
             @Override
@@ -264,8 +283,10 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
                     }
                     if (!allCached)
                         fetchPostsFromRealm();
-                    else
+                    else {
+                        hideProgressDialog();
                         mSwipeRefreshLayout.setRefreshing(false);
+                    }
 
                 }
             }
@@ -344,11 +365,44 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.Clic
 
     @Override
     public void onRowClicked(Posts post) {
-        gotoCommentActivity();
+        gotoCommentActivity(post);
     }
 
-    public void gotoCommentActivity() {
+    public void gotoCommentActivity(Posts post) {
         Log.d("API123", "gotoComment");
-        startActivity(new Intent(this, ScrollingActivity.class));
+        startActivity(new Intent(this, ScrollingActivity.class)
+                .putExtra("postId", post.id));
+    }
+
+    public void showProgressDialog() {
+//        if (mProgressDialog == null) {
+//            mProgressDialog = new ProgressDialog(this);
+//            mProgressDialog.setMessage("Loading");
+//            mProgressDialog.setIndeterminate(true);
+//        }
+//
+//        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        Log.d("API123", "hideProgressDialog");
+//        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+//            mProgressDialog.dismiss();
+//        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (r != null)
+            handler.removeCallbacks(r);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        startHandler();
     }
 }

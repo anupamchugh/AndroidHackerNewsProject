@@ -46,12 +46,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private static final int RC_SIGN_IN = 901;
     private static final String TAG = "API123";
     private String idToken;
-    public SharedPrefManager sharedPrefManager;
-    //private final Context mContext = this;
-
-    private String name, email;
-    private String photo;
-    private Uri photoUri;
     private SignInButton mSignInButton;
     public ProgressDialog mProgressDialog;
 

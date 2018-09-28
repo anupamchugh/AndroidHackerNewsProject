@@ -46,7 +46,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.anupamchugh.androidhackernewsproject.activities.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"

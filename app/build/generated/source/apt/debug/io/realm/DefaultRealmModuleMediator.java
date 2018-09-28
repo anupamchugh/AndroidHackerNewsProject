@@ -27,9 +27,9 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     private static final Set<Class<? extends RealmModel>> MODEL_CLASSES;
     static {
         Set<Class<? extends RealmModel>> modelClasses = new HashSet<Class<? extends RealmModel>>();
-        modelClasses.add(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class);
         modelClasses.add(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class);
         modelClasses.add(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class);
+        modelClasses.add(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class);
         MODEL_CLASSES = Collections.unmodifiableSet(modelClasses);
     }
 
@@ -37,14 +37,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public RealmObjectSchema createRealmObjectSchema(Class<? extends RealmModel> clazz, RealmSchema realmSchema) {
         checkClass(clazz);
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            return io.realm.PostIdRealmObjectRealmProxy.createRealmObjectSchema(realmSchema);
-        }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             return io.realm.CommentIdObjectRealmProxy.createRealmObjectSchema(realmSchema);
         }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             return io.realm.PostsRealmProxy.createRealmObjectSchema(realmSchema);
+        }
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            return io.realm.PostIdRealmObjectRealmProxy.createRealmObjectSchema(realmSchema);
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -53,14 +53,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public ColumnInfo validateTable(Class<? extends RealmModel> clazz, SharedRealm sharedRealm, boolean allowExtraColumns) {
         checkClass(clazz);
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            return io.realm.PostIdRealmObjectRealmProxy.validateTable(sharedRealm, allowExtraColumns);
-        }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             return io.realm.CommentIdObjectRealmProxy.validateTable(sharedRealm, allowExtraColumns);
         }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             return io.realm.PostsRealmProxy.validateTable(sharedRealm, allowExtraColumns);
+        }
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            return io.realm.PostIdRealmObjectRealmProxy.validateTable(sharedRealm, allowExtraColumns);
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -69,14 +69,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public List<String> getFieldNames(Class<? extends RealmModel> clazz) {
         checkClass(clazz);
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            return io.realm.PostIdRealmObjectRealmProxy.getFieldNames();
-        }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             return io.realm.CommentIdObjectRealmProxy.getFieldNames();
         }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             return io.realm.PostsRealmProxy.getFieldNames();
+        }
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            return io.realm.PostIdRealmObjectRealmProxy.getFieldNames();
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -85,14 +85,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public String getTableName(Class<? extends RealmModel> clazz) {
         checkClass(clazz);
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            return io.realm.PostIdRealmObjectRealmProxy.getTableName();
-        }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             return io.realm.CommentIdObjectRealmProxy.getTableName();
         }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             return io.realm.PostsRealmProxy.getTableName();
+        }
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            return io.realm.PostIdRealmObjectRealmProxy.getTableName();
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -104,14 +104,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
             objectContext.set((BaseRealm) baseRealm, row, columnInfo, acceptDefaultValue, excludeFields);
             checkClass(clazz);
 
-            if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-                return clazz.cast(new io.realm.PostIdRealmObjectRealmProxy());
-            }
             if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
                 return clazz.cast(new io.realm.CommentIdObjectRealmProxy());
             }
             if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
                 return clazz.cast(new io.realm.PostsRealmProxy());
+            }
+            if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+                return clazz.cast(new io.realm.PostIdRealmObjectRealmProxy());
             }
             throw getMissingProxyClassException(clazz);
         } finally {
@@ -130,14 +130,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         // generated by RealmProxy or the original type extending directly from RealmObject
         @SuppressWarnings("unchecked") Class<E> clazz = (Class<E>) ((obj instanceof RealmObjectProxy) ? obj.getClass().getSuperclass() : obj.getClass());
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            return clazz.cast(io.realm.PostIdRealmObjectRealmProxy.copyOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) obj, update, cache));
-        }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             return clazz.cast(io.realm.CommentIdObjectRealmProxy.copyOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject) obj, update, cache));
         }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             return clazz.cast(io.realm.PostsRealmProxy.copyOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.Posts) obj, update, cache));
+        }
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            return clazz.cast(io.realm.PostIdRealmObjectRealmProxy.copyOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) obj, update, cache));
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -148,12 +148,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         // generated by RealmProxy or the original type extending directly from RealmObject
         @SuppressWarnings("unchecked") Class<RealmModel> clazz = (Class<RealmModel>) ((object instanceof RealmObjectProxy) ? object.getClass().getSuperclass() : object.getClass());
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            io.realm.PostIdRealmObjectRealmProxy.insert(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) object, cache);
-        } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             io.realm.CommentIdObjectRealmProxy.insert(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject) object, cache);
         } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             io.realm.PostsRealmProxy.insert(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.Posts) object, cache);
+        } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            io.realm.PostIdRealmObjectRealmProxy.insert(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) object, cache);
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -171,22 +171,22 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
             // generated by RealmProxy or the original type extending directly from RealmObject
             @SuppressWarnings("unchecked") Class<RealmModel> clazz = (Class<RealmModel>) ((object instanceof RealmObjectProxy) ? object.getClass().getSuperclass() : object.getClass());
 
-            if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-                io.realm.PostIdRealmObjectRealmProxy.insert(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) object, cache);
-            } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
+            if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
                 io.realm.CommentIdObjectRealmProxy.insert(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject) object, cache);
             } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
                 io.realm.PostsRealmProxy.insert(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.Posts) object, cache);
+            } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+                io.realm.PostIdRealmObjectRealmProxy.insert(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) object, cache);
             } else {
                 throw getMissingProxyClassException(clazz);
             }
             if (iterator.hasNext()) {
-                if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-                    io.realm.PostIdRealmObjectRealmProxy.insert(realm, iterator, cache);
-                } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
+                if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
                     io.realm.CommentIdObjectRealmProxy.insert(realm, iterator, cache);
                 } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
                     io.realm.PostsRealmProxy.insert(realm, iterator, cache);
+                } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+                    io.realm.PostIdRealmObjectRealmProxy.insert(realm, iterator, cache);
                 } else {
                     throw getMissingProxyClassException(clazz);
                 }
@@ -200,12 +200,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         // generated by RealmProxy or the original type extending directly from RealmObject
         @SuppressWarnings("unchecked") Class<RealmModel> clazz = (Class<RealmModel>) ((obj instanceof RealmObjectProxy) ? obj.getClass().getSuperclass() : obj.getClass());
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            io.realm.PostIdRealmObjectRealmProxy.insertOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) obj, cache);
-        } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             io.realm.CommentIdObjectRealmProxy.insertOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject) obj, cache);
         } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             io.realm.PostsRealmProxy.insertOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.Posts) obj, cache);
+        } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            io.realm.PostIdRealmObjectRealmProxy.insertOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) obj, cache);
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -223,22 +223,22 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
             // generated by RealmProxy or the original type extending directly from RealmObject
             @SuppressWarnings("unchecked") Class<RealmModel> clazz = (Class<RealmModel>) ((object instanceof RealmObjectProxy) ? object.getClass().getSuperclass() : object.getClass());
 
-            if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-                io.realm.PostIdRealmObjectRealmProxy.insertOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) object, cache);
-            } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
+            if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
                 io.realm.CommentIdObjectRealmProxy.insertOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject) object, cache);
             } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
                 io.realm.PostsRealmProxy.insertOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.Posts) object, cache);
+            } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+                io.realm.PostIdRealmObjectRealmProxy.insertOrUpdate(realm, (com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) object, cache);
             } else {
                 throw getMissingProxyClassException(clazz);
             }
             if (iterator.hasNext()) {
-                if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-                    io.realm.PostIdRealmObjectRealmProxy.insertOrUpdate(realm, iterator, cache);
-                } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
+                if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
                     io.realm.CommentIdObjectRealmProxy.insertOrUpdate(realm, iterator, cache);
                 } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
                     io.realm.PostsRealmProxy.insertOrUpdate(realm, iterator, cache);
+                } else if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+                    io.realm.PostIdRealmObjectRealmProxy.insertOrUpdate(realm, iterator, cache);
                 } else {
                     throw getMissingProxyClassException(clazz);
                 }
@@ -251,14 +251,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         throws JSONException {
         checkClass(clazz);
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            return clazz.cast(io.realm.PostIdRealmObjectRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
-        }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             return clazz.cast(io.realm.CommentIdObjectRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
         }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             return clazz.cast(io.realm.PostsRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
+        }
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            return clazz.cast(io.realm.PostIdRealmObjectRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -268,14 +268,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         throws IOException {
         checkClass(clazz);
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            return clazz.cast(io.realm.PostIdRealmObjectRealmProxy.createUsingJsonStream(realm, reader));
-        }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             return clazz.cast(io.realm.CommentIdObjectRealmProxy.createUsingJsonStream(realm, reader));
         }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             return clazz.cast(io.realm.PostsRealmProxy.createUsingJsonStream(realm, reader));
+        }
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            return clazz.cast(io.realm.PostIdRealmObjectRealmProxy.createUsingJsonStream(realm, reader));
         }
         throw getMissingProxyClassException(clazz);
     }
@@ -286,14 +286,14 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         // generated by RealmProxy or the original type extending directly from RealmObject
         @SuppressWarnings("unchecked") Class<E> clazz = (Class<E>) realmObject.getClass().getSuperclass();
 
-        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
-            return clazz.cast(io.realm.PostIdRealmObjectRealmProxy.createDetachedCopy((com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) realmObject, 0, maxDepth, cache));
-        }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject.class)) {
             return clazz.cast(io.realm.CommentIdObjectRealmProxy.createDetachedCopy((com.anupamchugh.androidhackernewsproject.realmPOJO.CommentIdObject) realmObject, 0, maxDepth, cache));
         }
         if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.Posts.class)) {
             return clazz.cast(io.realm.PostsRealmProxy.createDetachedCopy((com.anupamchugh.androidhackernewsproject.realmPOJO.Posts) realmObject, 0, maxDepth, cache));
+        }
+        if (clazz.equals(com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject.class)) {
+            return clazz.cast(io.realm.PostIdRealmObjectRealmProxy.createDetachedCopy((com.anupamchugh.androidhackernewsproject.realmPOJO.PostIdRealmObject) realmObject, 0, maxDepth, cache));
         }
         throw getMissingProxyClassException(clazz);
     }

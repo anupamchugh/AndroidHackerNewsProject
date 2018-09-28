@@ -1,5 +1,6 @@
 package com.anupamchugh.androidhackernewsproject;
 
+import com.anupamchugh.androidhackernewsproject.realmPOJO.CommentObject;
 import com.anupamchugh.androidhackernewsproject.realmPOJO.Posts;
 
 import java.util.List;
@@ -16,5 +17,8 @@ public interface APIInterface {
 
     @GET("item/{id}.json?print=pretty")
     Call<ResponseBody> getPost(@Path("id") long id);
+
+    @GET("item/{id}.json?print=pretty")
+    Call<CommentObject> getComment(@Path("id") long id);
 }
 

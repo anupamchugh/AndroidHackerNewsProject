@@ -1,5 +1,8 @@
 package com.anupamchugh.androidhackernewsproject.realmPOJO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -8,7 +11,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Posts extends RealmObject implements Comparable, Cloneable {
+public class Posts extends RealmObject implements Comparable, Cloneable{
 
     public static final String TIMESTAMP = "timeStamp";
 

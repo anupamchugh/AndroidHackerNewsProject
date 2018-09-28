@@ -4,7 +4,6 @@ import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,23 +11,21 @@ import android.widget.TextView;
 
 import com.anupamchugh.androidhackernewsproject.realmPOJO.Posts;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
 public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.PostViewHolder> {
 
-    RealmResults<Posts> mBooks;
+    RealmResults<Posts> mPosts;
     ClickAdapterListener listener;
 
     public PostsAdapter(RealmResults<Posts> books, ClickAdapterListener listener) {
         super(books, true);
-        mBooks = books;
+        mPosts = books;
         this.listener = listener;
     }
 
@@ -110,17 +107,17 @@ public class PostsAdapter extends RealmRecyclerViewAdapter<Posts, PostsAdapter.P
 
     @Override
     public int getItemCount() {
-        return mBooks.size();
+        return mPosts.size();
     }
 
     public RealmResults<Posts> getData() {
-        return mBooks;
+        return mPosts;
     }
 
     public void setData(RealmResults<Posts> newData) {
 
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffUtilCallBack(newData, mBooks));
-        mBooks = newData;
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PostDiffUtilCallBack(newData, mPosts));
+        mPosts = newData;
         diffResult.dispatchUpdatesTo(this);
     }
 
