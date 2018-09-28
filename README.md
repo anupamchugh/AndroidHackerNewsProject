@@ -1,4 +1,3 @@
 # AndroidHackerNewsProject
 
-
-![alt text](https://github.com/anupamchugh/AndroidHackerNewsProject/blob/master/screenshot.png =250x250)
+<img src="https://github.com/anupamchugh/AndroidHackerNewsProject/blob/master/screenshot.png" width="248">
